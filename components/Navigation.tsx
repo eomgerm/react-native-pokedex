@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import Home from "./Home";
+import Home from "./Home/Home";
 import { Provider as PaperProvider } from "react-native-paper";
 
 const Stack = createNativeStackNavigator();

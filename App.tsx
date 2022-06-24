@@ -1,13 +1,13 @@
-import { useFonts } from "expo-font";
 import Navigation from "./components/Navigation";
+import { useFonts } from "expo-font";
 
 export default function App() {
-  const [isFontLoaded] = useFonts({
-    CircularStdBlack: require("./assets/fonts/CircularStd-Black.ttf"),
-    CircularStdBold: require("./assets/fonts/CircularStd-Bold.ttf"),
+  const [isFontsLoaded] = useFonts({
     CircularStdBook: require("./assets/fonts/CircularStd-Book.ttf"),
     CircularStdMedium: require("./assets/fonts/CircularStd-Medium.ttf"),
+    CircularStdBold: require("./assets/fonts/CircularStd-Bold.ttf"),
+    CircularStdBlack: require("./assets/fonts/CircularStd-Black.ttf"),
   });
 
-  return isFontLoaded && <Navigation />;
+  return isFontsLoaded && <Navigation />;
 }
