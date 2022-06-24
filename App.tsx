@@ -1,20 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from "expo-font";
+import Navigation from "./components/Navigation";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [isFontLoaded] = useFonts({
+    CircularStdBlack: require("./assets/fonts/CircularStd-Black.ttf"),
+    CircularStdBold: require("./assets/fonts/CircularStd-Bold.ttf"),
+    CircularStdBook: require("./assets/fonts/CircularStd-Book.ttf"),
+    CircularStdMedium: require("./assets/fonts/CircularStd-Medium.ttf"),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return isFontLoaded && <Navigation />;
+}
