@@ -19,13 +19,6 @@ const CategoryButton = ({ width, category, navigation }: CategoryButtonProps) =>
       width: (width - 50) / 2,
       height: 80,
       marginBottom: 10,
-      shadowOffset: {
-        width: 0,
-        height: -50,
-      },
-      shadowColor: category.color,
-      shadowRadius: 1,
-      shadowOpacity: 0.7,
     },
     circle: {
       width: 80 * 1.03,
@@ -55,11 +48,13 @@ const CategoryButton = ({ width, category, navigation }: CategoryButtonProps) =>
   };
 
   return (
-    <TouchableOpacity style={styles.categroyButton} onPress={onPress}>
-      <View style={styles.circle} />
-      <Text style={{ color: "white", fontFamily: "CircularStdBold", marginLeft: 20, fontSize: 20 }}>{category.name}</Text>
-      <Image style={styles.pokeballDecoration} source={require("../assets/pokeball.png")} />
-    </TouchableOpacity>
+    <View style={{ shadowOffset: { width: 0, height: 10 }, shadowColor: category.color, shadowOpacity: 0.4, shadowRadius: 8 }}>
+      <TouchableOpacity style={styles.categroyButton} onPress={onPress}>
+        <View style={styles.circle} />
+        <Text style={{ color: "white", fontFamily: "CircularStdBold", marginLeft: 20, fontSize: 20 }}>{category.name}</Text>
+        <Image style={styles.pokeballDecoration} source={require("../assets/pokeball.png")} />
+      </TouchableOpacity>
+    </View>
   );
 };
 
