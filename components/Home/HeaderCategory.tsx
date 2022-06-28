@@ -3,15 +3,16 @@ import { FontAwesome } from "@expo/vector-icons";
 import { categories } from "../../data/categories";
 import CategoryButton from "../CategoryButton";
 import { useState } from "react";
+import { HomeProps } from "./Home";
 
-const HeaderCategory = ({ navigation }) => {
-  const { height, width } = useWindowDimensions();
+const HeaderCategory = ({ navigation }: HomeProps) => {
+  const { width } = useWindowDimensions();
   const [searchText, setSearchText] = useState("");
 
   return (
     <>
       <View style={styles.headContainer}>
-        <Image style={styles.pokeball} source={require("../../assets/pokeball.png")} />
+        <Image style={{ ...styles.pokeball, width: width * 0.664, height: width * 0.664 }} source={require("../../assets/pokeball.png")} />
         <Text style={styles.text}>What Pokemon</Text>
         <Text style={{ ...styles.text, marginBottom: 15 }}>are you looking for?</Text>
       </View>
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     backgroundColor: "white",
     paddingHorizontal: 20,
-    height: 250,
+    height: 275,
   },
   buttonContainer: {
     paddingTop: 30,
@@ -75,10 +76,8 @@ const styles = StyleSheet.create({
     left: 18,
   },
   pokeball: {
-    width: 240,
-    height: 240,
     top: -10,
-    right: -105,
+    right: -90,
     position: "absolute",
     tintColor: "rgba(0,0,0, 0.05)",
   },
