@@ -1,4 +1,4 @@
-import Navigation from "./components/Navigation";
+import Routes from "./components/Routes";
 import { useFonts } from "expo-font";
 
 export default function App() {
@@ -9,5 +9,5 @@ export default function App() {
     CircularStdBlack: require("./assets/fonts/CircularStd-Black.ttf"),
   });
 
-  return isFontsLoaded && <Navigation />;
+  return isFontsLoaded && <Routes />;
 }
