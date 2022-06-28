@@ -1,12 +1,15 @@
+import { CommonActions } from "@react-navigation/native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Category } from "../data/categories";
+import { HomeScreenProps } from "./Home/Home";
 
 type CategoryButtonProps = {
   width: number;
   category: Category;
+  navigation: HomeScreenProps;
 };
 
-const CategoryButton = ({ width, category }: CategoryButtonProps) => {
+const CategoryButton = ({ width, category, navigation }: CategoryButtonProps) => {
   const styles = StyleSheet.create({
     categroyButton: {
       backgroundColor: category.color,
@@ -42,8 +45,17 @@ const CategoryButton = ({ width, category }: CategoryButtonProps) => {
       tintColor: "rgba(255, 255, 255, 0.14)",
     },
   });
+
+  const onPress = () => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: category.name,
+      })
+    );
+  };
+
   return (
-    <TouchableOpacity style={styles.categroyButton}>
+    <TouchableOpacity style={styles.categroyButton} onPress={onPress}>
       <View style={styles.circle} />
       <Text style={{ color: "white", fontFamily: "CircularStdBold", marginLeft: 20, fontSize: 20 }}>{category.name}</Text>
       <Image style={styles.pokeballDecoration} source={require("../assets/pokeball.png")} />

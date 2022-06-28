@@ -4,7 +4,7 @@ import { categories } from "../../data/categories";
 import CategoryButton from "../CategoryButton";
 import { useState } from "react";
 
-const HeaderCategory = () => {
+const HeaderCategory = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
   const [searchText, setSearchText] = useState("");
 
@@ -23,7 +23,7 @@ const HeaderCategory = () => {
       </View>
       <View style={styles.buttonContainer}>
         {categories.map((category) => (
-          <CategoryButton width={width} category={category} key={category.name} />
+          <CategoryButton width={width} category={category} key={category.name} navigation={navigation} />
         ))}
       </View>
     </>
