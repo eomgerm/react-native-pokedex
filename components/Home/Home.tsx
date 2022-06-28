@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackProps } from "../Routes";
 
-type HomeScreenProps = NativeStackNavigationProp<RootStackProps, "Home">;
+export type HomeScreenProps = NativeStackNavigationProp<RootStackProps, "Home">;
 
 type Props = {
   navigation: HomeScreenProps;
@@ -50,7 +50,7 @@ const Home = ({ navigation }: Props) => {
             right: 0,
           }}
         />
-        <HeaderCategory />
+        <HeaderCategory navigation={navigation} />
         <PokemonNews />
       </Animated.ScrollView>
       <Animated.View
