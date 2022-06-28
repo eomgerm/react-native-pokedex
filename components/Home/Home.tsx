@@ -6,13 +6,13 @@ import { useRef } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackProps } from "../Routes";
 
-export type HomeScreenProps = NativeStackNavigationProp<RootStackProps, "Home">;
+type HomeScreenProps = NativeStackNavigationProp<RootStackProps, "Home">;
 
-type Props = {
+export type HomeProps = {
   navigation: HomeScreenProps;
 };
 
-const Home = ({ navigation }: Props) => {
+const Home = ({ navigation }: HomeProps) => {
   const { width } = useWindowDimensions();
   const scrollY = useRef(new Animated.Value(0)).current;
   const headerOpacity = scrollY.interpolate({
