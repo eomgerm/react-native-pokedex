@@ -9,6 +9,7 @@ const AppColors: Colors = {
   yellow: "#fbc02d",
   purple: "#ae52d4",
   brown: "#8b6b61",
+  grey: "#212121",
 };
 
 export default AppColors;
