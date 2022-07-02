@@ -1,23 +1,43 @@
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import PokeballBackground from "../commons/PokeballBackground";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackProps } from "../Routes";
+import ActionButton, { ActionButtonItem } from "react-native-action-button";
+import AppColors from "../../styles/colors";
+import { useState } from "react";
+import FAB from "./FAB";
 
-const Home = () => {
+type PokedexNavigationProps = NativeStackNavigationProp<RootStackProps, "Pokedex">;
+
+export type PokedexHomeProps = {
+  navigation: PokedexNavigationProps;
+};
+
+const Home = ({ navigation }: PokedexHomeProps) => {
+  const [fabOpen, setFabOpen] = useState(false);
+
   return (
-    <View>
-      <Image style={styles.pokeball} source={require("../../assets/pokeball.png")} />
-      <Text>This is home</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <PokeballBackground />
+      <View style={{ backgroundColor: "transparent" }}>
+        <View style={{ justifyContent: "space-between", flexDirection: "row", paddingHorizontal: 27, paddingTop: 18 }}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="menu" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={{ paddingHorizontal: 27, marginTop: 40 }}>
+          <Text style={{ fontFamily: "CircularStdBlack", fontSize: 40 }}>Pokedex</Text>
+        </View>
+      </View>
+      <FAB />
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  pokeball: {
-    width: 270,
-    height: 270,
-    top: -80,
-    right: -90,
-    position: "absolute",
-    tintColor: "rgba(0,0,0, 0.05)",
-  },
-});
+const styles = StyleSheet.create({});
 
 export default Home;
