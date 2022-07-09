@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TextInput, Image, useWindowDimensions } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { categories } from "../../data/categories";
-import CategoryButton from "../CategoryButton";
+import CategoryButton from "./CategoryButton";
 import { useState } from "react";
 import { HomeProps } from "./Home";
 import PokeballBackground from "../commons/PokeballBackground";
@@ -25,7 +25,7 @@ const HeaderCategory = ({ navigation }: HomeProps) => {
       </View>
       <View style={styles.buttonContainer}>
         {categories.map((category) => (
-          <CategoryButton width={width} category={category} key={category.name} navigation={navigation} />
+          <CategoryButton width={width} category={category} key={category.name} />
         ))}
       </View>
     </>
