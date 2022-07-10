@@ -22,11 +22,11 @@ const Routes = () => {
           <Stack.Screen
             name="Pokedex"
             component={Pokedex}
-            options={({ navigation }) => ({
+            options={{
               animation: "fade",
               customAnimationOnGesture: true,
               headerShown: false,
-            })}
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

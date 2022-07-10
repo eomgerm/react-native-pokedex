@@ -1,44 +1,44 @@
-import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, FlatList } from "react-native";
 import PokeballBackground from "../commons/PokeballBackground";
-import { Ionicons } from "@expo/vector-icons";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackProps } from "../Routes";
-import { useState } from "react";
-import FAB from "./FAB";
+import { useEffect, useState } from "react";
+import FAB from "./FAB/FAB";
+import axios from "axios";
+import { Result } from "../../types/pokemon_api_result";
+import Pokemon from "../../types/pokemon";
+import PokemonCard from "./PokemonCard";
+import Header from "./Header";
 
-type PokedexNavigationProps = NativeStackNavigationProp<RootStackProps, "Pokedex">;
+const Home = () => {
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-export type PokedexHomeProps = {
-  navigation: PokedexNavigationProps;
-};
-
-const Home = ({ navigation }: PokedexHomeProps) => {
-  const [fabOpen, setFabOpen] = useState(false);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios("https://pokeapi.co/api/v2/pokemon/");
+      const pokemonsArr = await Promise.all(
+        data.results.map(async (result: Result) => {
+          const { data: pokemonData } = await axios(result.url);
+          return pokemonData;
+        })
+      );
+      setPokemons(pokemonsArr);
+    })();
+  }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingTop: 50 }}>
       <PokeballBackground />
-      <View style={{ backgroundColor: "transparent", zIndex: 100 }}>
-        <View style={{ justifyContent: "space-between", flexDirection: "row", paddingHorizontal: 27, paddingTop: 18 }}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="arrow-back" size={24} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Ionicons name="menu" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={{ paddingHorizontal: 27, marginTop: 40 }}>
-          <Text style={{ fontFamily: "CircularStdBlack", fontSize: 40 }}>Pokedex</Text>
-        </View>
-      </View>
-      <View>
-                
-      </View>
+      <Header />
+      <FlatList
+        style={{ flex: 1, marginTop: 8 }}
+        data={pokemons}
+        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 24 }}
+        keyExtractor={(pokemon) => String(pokemon.id)}
+        numColumns={2}
+        renderItem={({ item: pokemon }) => <PokemonCard pokemon={pokemon} />}
+      />
       <FAB />
-    </SafeAreaView>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Home;
