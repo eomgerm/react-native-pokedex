@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, View, Image } from "react-native";
+import { TouchableOpacity, Text, View, Image, StyleSheet } from "react-native";
 import { POKEMON_TYPE_COLORS } from "../../data/pokemonTypeColors";
 import Pokemon from "../../types/pokemon";
 
@@ -8,7 +8,7 @@ type PokemonCardProps = {
 
 const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const pokemonName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-  const pokemonId = pokemon.id;
+  const pokemonId = `${pokemon.id}`.padStart(3, "0");
   const types = pokemon.types;
 
   return (
@@ -43,6 +43,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
               style={{
                 fontFamily: "CircularStdBold",
                 color: "white",
+                fontSize: 12,
               }}
             >
               {type.type.name[0].toUpperCase() + type.type.name.slice(1)}
@@ -51,10 +52,10 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         ))}
       </View>
 
-      <Text style={{ position: "absolute", top: 8, right: 8, color: "#0003", fontFamily: "CircularStdBold" }}>#00{pokemonId}</Text>
+      <Text style={{ position: "absolute", top: 8, right: 8, color: "#0003", fontFamily: "CircularStdBold" }}>#{pokemonId}</Text>
       <Image
         source={{ uri: pokemon.sprites.other["official-artwork"].front_default }}
-        style={{ width: 72, height: 72, position: "absolute", bottom: 2, right: 2 }}
+        style={{ width: 72, height: 72, position: "absolute", bottom: 4, right: 4 }}
       />
       <Image
         source={require("../../assets/pokeball.png")}
