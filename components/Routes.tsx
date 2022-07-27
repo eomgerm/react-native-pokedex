@@ -5,12 +5,12 @@ import Home from "./Home/Home";
 import { Provider as PaperProvider } from "react-native-paper";
 import Pokedex from "./Pokedex/PokdexStack";
 
-export type RootStackProps = {
+export type RootStackParamsList = {
   Home: undefined;
   Pokedex: undefined;
 };
 
-const Stack = createNativeStackNavigator<RootStackProps>();
+const Stack = createNativeStackNavigator<RootStackParamsList>();
 
 const Routes = () => {
   return (
