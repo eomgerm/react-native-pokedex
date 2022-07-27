@@ -1,12 +1,17 @@
-import { TouchableOpacity, Text, View, Image, StyleSheet } from "react-native";
-import { POKEMON_TYPE_COLORS } from "../../data/pokemonTypeColors";
-import Pokemon from "../../types/pokemon";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { TouchableOpacity, Text, View, Image } from "react-native";
+import { POKEMON_TYPE_COLORS } from "../../../data/pokemonTypeColors";
+import Pokemon from "../../../types/pokemon";
+import { PokedexStackParamsList } from "../PokdexStack";
 
 type PokemonCardProps = {
   pokemon: Pokemon;
 };
 
 const PokemonCard = ({ pokemon }: PokemonCardProps) => {
+  const navigation = useNavigation();
+
   const pokemonName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
   const pokemonId = `${pokemon.id}`.padStart(3, "0");
   const types = pokemon.types;
@@ -58,7 +63,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         style={{ width: 72, height: 72, position: "absolute", bottom: 4, right: 4 }}
       />
       <Image
-        source={require("../../assets/pokeball.png")}
+        source={require("../../../assets/pokeball.png")}
         style={{ width: 88, height: 88, position: "absolute", right: -8, bottom: -8, tintColor: "rgba(255 ,255, 255, 0.14)" }}
       />
     </TouchableOpacity>

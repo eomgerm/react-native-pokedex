@@ -1,5 +1,5 @@
 import { Animated, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
-import AppColors from "../../../styles/colors";
+import AppColors from "../../../../styles/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useCallback, useMemo, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

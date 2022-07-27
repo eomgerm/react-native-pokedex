@@ -1,13 +1,13 @@
 import { View, FlatList, Image } from "react-native";
-import PokeballBackground from "../commons/PokeballBackground";
+import PokeballBackground from "../../commons/PokeballBackground";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import FAB from "./FAB/FAB";
 import axios from "axios";
-import PokemonApiResult, { Result } from "../../types/pokemon_api_result";
-import Pokemon from "../../types/pokemon";
+import PokemonApiResult, { Result } from "../../../types/pokemon_api_result";
+import Pokemon from "../../../types/pokemon";
 import PokemonCard from "./PokemonCard";
 import Header from "./Header";
-import Loading from "../commons/Loading";
+import Loading from "../../commons/Loading";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
