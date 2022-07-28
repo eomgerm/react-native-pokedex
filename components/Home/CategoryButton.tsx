@@ -1,6 +1,7 @@
 import { CommonActions, useNavigation } from "@react-navigation/native";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Category } from "../../data/categories";
+import Pokeball from "../commons/Pokeball";
 
 type CategoryButtonProps = {
   width: number;
@@ -29,14 +30,6 @@ const CategoryButton = ({ width, category }: CategoryButtonProps) => {
       left: -80 * 0.53,
       backgroundColor: "rgba(255, 255, 255, 0.2)",
     },
-    pokeballDecoration: {
-      width: 80 * 1.388,
-      height: 80 * 1.388,
-      position: "absolute",
-      top: -80 * 0.16,
-      right: -80 * 0.25,
-      tintColor: "rgba(255, 255, 255, 0.14)",
-    },
   });
 
   const onPress = () => {
@@ -52,7 +45,12 @@ const CategoryButton = ({ width, category }: CategoryButtonProps) => {
       <TouchableOpacity style={styles.categroyButton} onPress={onPress}>
         <View style={styles.circle} />
         <Text style={{ color: "white", fontFamily: "CircularStdBold", marginLeft: 20, fontSize: 20 }}>{category.name}</Text>
-        <Image style={styles.pokeballDecoration} source={require("../../assets/pokeball.png")} />
+        <Pokeball
+          width={80 * 1.388}
+          height={80 * 1.388}
+          style={{ position: "absolute", top: -80 * 0.16, right: -80 * 0.25 }}
+          color="rgba(255, 255, 255, 0.14)"
+        />
       </TouchableOpacity>
     </View>
   );

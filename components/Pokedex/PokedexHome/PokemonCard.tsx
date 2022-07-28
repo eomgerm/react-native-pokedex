@@ -1,9 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { TouchableOpacity, Text, View, Image } from "react-native";
+import { TouchableOpacity, Text, View, Image, StyleSheet } from "react-native";
 import { POKEMON_TYPE_COLORS } from "../../../data/pokemonTypeColors";
 import Pokemon from "../../../types/pokemon";
-import { PokedexStackParamsList } from "../PokdexStack";
+import Pokeball from "../../commons/Pokeball";
 
 type PokemonCardProps = {
   pokemon: Pokemon;
@@ -16,19 +15,21 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const pokemonId = `${pokemon.id}`.padStart(3, "0");
   const types = pokemon.types;
 
+  const styles = StyleSheet.create({
+    button: {
+      height: 110,
+      backgroundColor: POKEMON_TYPE_COLORS[pokemon.types[0].type.name],
+      margin: 8,
+      padding: 16,
+      borderRadius: 12,
+      overflow: "hidden",
+      alignItems: "flex-start",
+      flex: 1,
+    },
+  });
+
   return (
-    <TouchableOpacity
-      style={{
-        height: 110,
-        backgroundColor: POKEMON_TYPE_COLORS[pokemon.types[0].type.name],
-        margin: 8,
-        padding: 16,
-        borderRadius: 12,
-        overflow: "hidden",
-        alignItems: "flex-start",
-        flex: 1,
-      }}
-    >
+    <TouchableOpacity style={styles.button}>
       <Text style={{ fontFamily: "CircularStdBold", fontSize: 18, color: "white", marginBottom: 5 }}>{pokemonName}</Text>
       <View style={{ flex: 1 }}>
         {types.map((type) => (
@@ -62,10 +63,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         source={{ uri: pokemon.sprites.other["official-artwork"].front_default }}
         style={{ width: 72, height: 72, position: "absolute", bottom: 4, right: 4 }}
       />
-      <Image
-        source={require("../../../assets/pokeball.png")}
-        style={{ width: 88, height: 88, position: "absolute", right: -8, bottom: -8, tintColor: "rgba(255 ,255, 255, 0.14)" }}
-      />
+      <Pokeball width={88} height={88} style={{ position: "absolute", right: -8, bottom: -8 }} color="rgba(255 ,255, 255, 0.14)" />
     </TouchableOpacity>
   );
 };

@@ -4,16 +4,17 @@ import { categories } from "../../data/categories";
 import CategoryButton from "./CategoryButton";
 import { useState } from "react";
 import { HomeProps } from "./Home";
-import PokeballBackground from "../commons/PokeballBackground";
+import Pokeball from "../commons/Pokeball";
 
 const HeaderCategory = ({ navigation }: HomeProps) => {
   const { width } = useWindowDimensions();
   const [searchText, setSearchText] = useState("");
+  const pokeballSize = width * 0.664;
 
   return (
     <>
       <View style={styles.headContainer}>
-        <PokeballBackground />
+        <Pokeball width={pokeballSize} height={pokeballSize} style={{ position: "absolute", top: -50, right: -90 }} />
         <Text style={styles.text}>What Pokemon</Text>
         <Text style={{ ...styles.text, marginBottom: 15 }}>are you looking for?</Text>
       </View>

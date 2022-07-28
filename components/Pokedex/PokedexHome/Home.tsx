@@ -1,5 +1,4 @@
-import { View, FlatList, Image } from "react-native";
-import PokeballBackground from "../../commons/PokeballBackground";
+import { View, FlatList } from "react-native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import FAB from "./FAB/FAB";
 import axios from "axios";
@@ -46,7 +45,6 @@ const Home = () => {
 
   return (
     <View style={{ flex: 1, paddingTop: 50 }}>
-      <PokeballBackground />
       <Header />
       <FlatList
         style={{ flex: 1, marginTop: 8 }}
