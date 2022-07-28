@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <View style={{ backgroundColor: "transparent" }}>
-      <Pokeball width={pokeballSize} height={pokeballSize} style={{ position: "absolute", top: -50, right: -90 }} />
+      <Pokeball width={pokeballSize} height={pokeballSize} style={{ position: "absolute", top: -97, right: -90 }} />
       <View style={{ justifyContent: "space-between", flexDirection: "row", paddingHorizontal: 27, paddingTop: 18 }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />
