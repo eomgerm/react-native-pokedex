@@ -10,6 +10,8 @@ export type PokedexStackParamsList = {
 
 const Stack = createSharedElementStackNavigator<PokedexStackParamsList>();
 
+type RouteParams = { pokemon: Pokemon };
+
 const PokedexStack = () => {
   return (
     <Stack.Navigator>
@@ -26,7 +28,13 @@ const PokedexStack = () => {
           }),
         }}
         sharedElements={(route) => {
-          return [`${route.params.pokemon.id}`];
+          const { pokemon } = route.params as RouteParams;
+          const sharedArray = [pokemon.id + "name", pokemon.id + "image"];
+          pokemon.types.forEach((type) => {
+            sharedArray.push(pokemon.id + type.type.name);
+          });
+
+          return sharedArray;
         }}
       />
     </Stack.Navigator>
