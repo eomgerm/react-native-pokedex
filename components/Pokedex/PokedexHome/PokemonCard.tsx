@@ -6,6 +6,7 @@ import Pokemon from "../../../types/pokemon";
 import Pokeball from "../../commons/Pokeball";
 import { PokedexStackParamsList } from "../PokdexStack";
 import { SharedElement } from "react-navigation-shared-element";
+import PokemonTypeChip from "../../commons/PokemonTypeChip";
 
 type PokemonCardProps = {
   pokemon: Pokemon;
@@ -31,35 +32,6 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
     },
   });
 
-  type PokemonTypeChipProps = {
-    type: string;
-  };
-
-  const PokemonTypeChip = ({ type }: PokemonTypeChipProps) => {
-    const styles = StyleSheet.create({
-      container: {
-        backgroundColor: "rgba(255, 255, 255, 0.3)",
-        paddingVertical: 3,
-        paddingHorizontal: 8,
-        borderRadius: 20,
-        marginBottom: 5,
-        alignItems: "center",
-        justifyContent: "center",
-      },
-      text: {
-        fontFamily: "CircularStdBold",
-        color: "white",
-        fontSize: 12,
-      },
-    });
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{type[0].toUpperCase() + type.slice(1)}</Text>
-      </View>
-    );
-  };
-
   return (
     <TouchableOpacity
       style={styles.button}
@@ -67,16 +39,22 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         navigation.navigate("PokemonDetail", { pokemon });
       }}
     >
-      <Text style={{ fontFamily: "CircularStdBold", fontSize: 18, color: "white", marginBottom: 5 }}>{pokemonName}</Text>
-      <View style={{ flex: 1 }}>
+      <SharedElement id={pokemon.id + "name"}>
+        <Text style={{ fontFamily: "CircularStdBold", fontSize: 18, color: "white", marginBottom: 5 }}>{pokemonName}</Text>
+      </SharedElement>
+      <View style={{ flex: 1, marginTop: 5 }}>
         {types.map((type) => (
-          <PokemonTypeChip key={type.slot} type={type.type.name} />
+          <SharedElement key={type.slot} id={pokemon.id + type.type.name}>
+            <PokemonTypeChip size="small" type={type.type.name} />
+          </SharedElement>
         ))}
       </View>
 
-      <Text style={{ position: "absolute", top: 8, right: 8, color: "#0003", fontFamily: "CircularStdBold" }}>#{pokemonId}</Text>
-      <View style={{ position: "absolute", bottom: 4, right: 4 }}>
-        <SharedElement id={`${pokemon.id}`}>
+      <View style={{ position: "absolute", top: 8, right: 8 }}>
+        <Text style={{ color: "#0003", fontFamily: "CircularStdBold" }}>#{pokemonId}</Text>
+      </View>
+      <View style={{ position: "absolute", bottom: 4, right: 4, zIndex: 1 }}>
+        <SharedElement id={pokemon.id + "image"}>
           <Image source={{ uri: pokemon.sprites.other["official-artwork"].front_default }} style={{ width: 72, height: 72 }} />
         </SharedElement>
       </View>
