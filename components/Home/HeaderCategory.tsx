@@ -14,7 +14,7 @@ const HeaderCategory = ({ navigation }: HomeProps) => {
   return (
     <>
       <View style={styles.headContainer}>
-        <Pokeball width={pokeballSize} height={pokeballSize} style={{ position: "absolute", top: -50, right: -90 }} />
+        <Pokeball width={pokeballSize} height={pokeballSize} style={{ position: "absolute", top: -50, right: -92 }} />
         <Text style={styles.text}>What Pokemon</Text>
         <Text style={{ ...styles.text, marginBottom: 15 }}>are you looking for?</Text>
       </View>

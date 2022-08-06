@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, useWindowDimensions } from "react-native";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import FAB from "./FAB/FAB";
 import axios from "axios";
@@ -7,6 +7,7 @@ import Pokemon from "../../../types/pokemon";
 import PokemonCard from "./PokemonCard";
 import Header from "./Header";
 import Loading from "../../commons/Loading";
+import Pokeball from "../../commons/Pokeball";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
@@ -42,9 +43,12 @@ const Home = () => {
   }, []);
 
   const ListFooterComponent = useMemo(() => (loading ? <Loading /> : null), [loading]);
+  const { width } = useWindowDimensions();
+  const pokeballSize = width * 0.664;
 
   return (
-    <View style={{ flex: 1, paddingTop: 50 }}>
+    <View style={{ flex: 1 }}>
+      <Pokeball width={pokeballSize} height={pokeballSize} style={{ position: "absolute", top: -50, right: -93 }} />
       <Header />
       <FlatList
         style={{ flex: 1, marginTop: 8 }}
