@@ -7,9 +7,10 @@ import Pokeball from "../../commons/Pokeball";
 
 type MainProps = {
   pokemon: Pokemon;
+  translateY: Animated.Value;
 };
 
-const Main = ({ pokemon }: MainProps) => {
+const Main = ({ pokemon, translateY }: MainProps) => {
   const pokedexNumberTranslateX = useMemo(() => new Animated.Value(100), []);
   const generaTranslateX = useMemo(() => new Animated.Value(200), []);
 
@@ -36,6 +37,43 @@ const Main = ({ pokemon }: MainProps) => {
     ],
   };
 
+  const pokemonImageContainerStyle = {
+    opacity: translateY.interpolate({
+      inputRange: [-100, 0],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    }),
+    transform: [
+      {
+        translateY: translateY.interpolate({
+          inputRange: [-100, 0, 200],
+          outputRange: [-20, 0, 25],
+          extrapolate: "clamp",
+        }),
+      },
+      {
+        scale: translateY.interpolate({
+          inputRange: [-100, 0, 200],
+          outputRange: [0.9, 1, 1.1],
+          extrapolate: "clamp",
+        }),
+      },
+    ],
+  };
+
+  const summaryStyle = {
+    zIndex: translateY.interpolate({
+      inputRange: [-365, 0],
+      outputRange: [-1, 2],
+      extrapolate: "clamp",
+    }),
+    opacity: translateY.interpolate({
+      inputRange: [-200, 0],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    }),
+  };
+
   useEffect(() => {
     Animated.parallel([
       Animated.timing(pokedexNumberTranslateX, {
@@ -57,7 +95,7 @@ const Main = ({ pokemon }: MainProps) => {
 
   return (
     <>
-      <View style={{ paddingHorizontal: 27 }}>
+      <Animated.View style={{ paddingHorizontal: 27, ...summaryStyle }}>
         <View style={{ marginTop: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
           <SharedElement id={pokemon.id + "name"}>
             <Text style={{ fontFamily: "CircularStdBold", fontSize: 40, color: "white" }}>
@@ -80,15 +118,15 @@ const Main = ({ pokemon }: MainProps) => {
             <Text style={{ fontFamily: "CircularStdMedium", color: "white", fontSize: 16 }}>Flame Pokemon</Text>
           </Animated.View>
         </View>
-      </View>
-      <View style={{ alignItems: "center", marginTop: 20 }}>
+      </Animated.View>
+      <Animated.View style={{ alignItems: "center", marginTop: 20, ...pokemonImageContainerStyle }}>
         <Pokeball rotate width={240} height={240} style={{ position: "absolute" }} />
         <View style={{ marginTop: 15 }}>
           <SharedElement id={pokemon.id + "image"}>
             <Image source={{ uri: pokemon.sprites.other["official-artwork"].front_default }} style={{ width: 200, height: 200 }} />
           </SharedElement>
         </View>
-      </View>
+      </Animated.View>
     </>
   );
 };

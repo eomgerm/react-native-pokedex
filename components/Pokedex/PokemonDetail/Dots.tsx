@@ -1,11 +1,23 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, Animated, ViewProps, RegisteredStyle, ViewStyle } from "react-native";
 import Constants from "expo-constants";
 
-const Dots = () => {
+type DotsProps = {
+  translateY: Animated.Value;
+};
+
+const Dots = ({ translateY }: DotsProps) => {
   const dots = Array.from(Array(15).keys());
 
+  const fadeStyle = {
+    opacity: translateY.interpolate({
+      inputRange: [-200, 0],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    }),
+  };
+
   return (
-    <View style={{ position: "absolute", top: Constants.statusBarHeight - 28, right: "30%" }}>
+    <Animated.View style={{ position: "absolute", top: Constants.statusBarHeight - 28, right: "30%", ...fadeStyle }}>
       <FlatList
         data={dots}
         numColumns={5}
@@ -16,7 +28,7 @@ const Dots = () => {
           />
         )}
       />
-    </View>
+    </Animated.View>
   );
 };
 
