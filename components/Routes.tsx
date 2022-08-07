@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import Home from "./Home/Home";
 import { Provider as PaperProvider } from "react-native-paper";
 import Pokedex from "./Pokedex/PokdexStack";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 export type RootStackParamsList = {
   Home: undefined;
@@ -12,25 +13,32 @@ export type RootStackParamsList = {
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 
+const client = new ApolloClient({
+  uri: "https://beta.pokeapi.co/graphql/v1beta",
+  cache: new InMemoryCache(),
+});
+
 const Routes = () => {
   return (
-    <PaperProvider>
-      <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-          <Stack.Screen
-            name="Pokedex"
-            component={Pokedex}
-            options={{
-              animation: "fade",
-              customAnimationOnGesture: true,
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <ApolloProvider client={client}>
+      <PaperProvider>
+        <StatusBar style="auto" />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+            <Stack.Screen
+              name="Pokedex"
+              component={Pokedex}
+              options={{
+                animation: "fade",
+                customAnimationOnGesture: true,
+                headerShown: false,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </ApolloProvider>
   );
 };
 
