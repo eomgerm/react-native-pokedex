@@ -10,6 +10,7 @@ const AppColors: Colors = {
   purple: "#ae52d4",
   brown: "#8b6b61",
   grey: "#212121",
+  pink: "#f06292",
 };
 
 export default AppColors;
