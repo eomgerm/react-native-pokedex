@@ -109,13 +109,13 @@ const Main = ({ pokemon, translateY }: MainProps) => {
         <View style={{ flexDirection: "row", paddingVertical: 20, alignItems: "center", justifyContent: "space-between" }}>
           <View style={{ flexDirection: "row" }}>
             {pokemon.types.map((type) => (
-              <SharedElement key={type.slot} id={pokemon.id + type.type.name}>
-                <PokemonTypeChip type={type.type.name} />
+              <SharedElement key={type.slot} id={pokemon.id + type.name}>
+                <PokemonTypeChip type={type.name} />
               </SharedElement>
             ))}
           </View>
           <Animated.View style={generaStyle}>
-            <Text style={{ fontFamily: "CircularStdMedium", color: "white", fontSize: 16 }}>Flame Pokemon</Text>
+            <Text style={{ fontFamily: "CircularStdMedium", color: "white", fontSize: 16 }}>{pokemon.genera}</Text>
           </Animated.View>
         </View>
       </Animated.View>
@@ -123,7 +123,7 @@ const Main = ({ pokemon, translateY }: MainProps) => {
         <Pokeball rotate width={240} height={240} style={{ position: "absolute" }} />
         <View style={{ marginTop: 15 }}>
           <SharedElement id={pokemon.id + "image"}>
-            <Image source={{ uri: pokemon.sprites.other["official-artwork"].front_default }} style={{ width: 200, height: 200 }} />
+            <Image source={{ uri: pokemon.sprites }} style={{ width: 200, height: 200 }} />
           </SharedElement>
         </View>
       </Animated.View>

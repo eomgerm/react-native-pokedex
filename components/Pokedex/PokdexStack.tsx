@@ -31,7 +31,7 @@ const PokedexStack = () => {
           const { pokemon } = route.params as RouteParams;
           const sharedArray = [pokemon.id + "name", pokemon.id + "image"];
           pokemon.types.forEach((type) => {
-            sharedArray.push(pokemon.id + type.type.name);
+            sharedArray.push(pokemon.id + type.name);
           });
 
           return sharedArray;

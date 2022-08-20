@@ -22,7 +22,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const styles = StyleSheet.create({
     button: {
       height: 110,
-      backgroundColor: POKEMON_TYPE_COLORS[pokemon.types[0].type.name],
+      backgroundColor: POKEMON_TYPE_COLORS[pokemon.types[0].name],
       margin: 8,
       padding: 16,
       borderRadius: 12,
@@ -44,8 +44,8 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
       </SharedElement>
       <View style={{ flex: 1, marginTop: 5 }}>
         {types.map((type) => (
-          <SharedElement key={type.slot} id={pokemon.id + type.type.name}>
-            <PokemonTypeChip size="small" type={type.type.name} />
+          <SharedElement key={type.slot} id={pokemon.id + type.name}>
+            <PokemonTypeChip size="small" type={type.name} />
           </SharedElement>
         ))}
       </View>
@@ -55,7 +55,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
       </View>
       <View style={{ position: "absolute", bottom: 4, right: 4, zIndex: 1 }}>
         <SharedElement id={pokemon.id + "image"}>
-          <Image source={{ uri: pokemon.sprites.other["official-artwork"].front_default }} style={{ width: 72, height: 72 }} />
+          <Image source={{ uri: pokemon.sprites }} style={{ width: 72, height: 72 }} />
         </SharedElement>
       </View>
       <Pokeball width={88} height={88} style={{ position: "absolute", right: -8, bottom: -8 }} color="rgba(255 ,255, 255, 0.14)" />

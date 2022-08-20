@@ -7,7 +7,7 @@ import Main from "./Main";
 import Block from "./Block";
 import Dots from "./Dots";
 import { PanGestureHandler, PanGestureHandlerStateChangeEvent, State } from "react-native-gesture-handler";
-import Details from "./Details";
+import Details from "./Details/Details";
 
 const PokemonDetail = () => {
   const route = useRoute<RouteProp<PokedexStackParamsList, "PokemonDetail">>();
@@ -64,7 +64,7 @@ const PokemonDetail = () => {
   };
 
   return (
-    <View style={{ backgroundColor: POKEMON_TYPE_COLORS[pokemon.types[0].type.name], flex: 1 }}>
+    <View style={{ backgroundColor: POKEMON_TYPE_COLORS[pokemon.types[0].name], flex: 1 }}>
       <Dots translateY={translateY} />
       <Block />
       <Header pokemon={pokemon} translateY={translateY} />
@@ -72,7 +72,7 @@ const PokemonDetail = () => {
 
       <PanGestureHandler onHandlerStateChange={onHandlerStateChange} onGestureEvent={animatedEvent}>
         <Animated.View style={{ flex: 1, position: "relative", ...detailsStyle }}>
-          <Details />
+          <Details pokemon={pokemon} />
         </Animated.View>
       </PanGestureHandler>
     </View>
