@@ -1,9 +1,11 @@
 import { Animated, Easing, Text, View } from "react-native";
 import { TabProps } from "../Details";
 import { POKEMON_TYPE_COLORS } from "../../../../../data/pokemonTypeColors";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const BaseStats = ({ pokemon, currentTab }: TabProps) => {
+  const [animationDone, setAnimationDone] = useState<boolean>(false);
+
   type StatProps = {
     name: string;
     stat: number;
@@ -12,23 +14,27 @@ const BaseStats = ({ pokemon, currentTab }: TabProps) => {
   const Stat = ({ name, stat }: StatProps) => {
     const fill = useMemo(() => new Animated.Value(0), []);
 
-    const fillStyle = {
-      width: fill.interpolate({
-        inputRange: [0, stat],
-        outputRange: ["0%", `${stat}%`],
-        extrapolate: "clamp",
-      }),
-    };
+    const fillStyle = animationDone
+      ? { width: `${stat}%` }
+      : {
+          width: fill.interpolate({
+            inputRange: [0, stat],
+            outputRange: ["0%", `${stat}%`],
+            extrapolate: "clamp",
+          }),
+        };
 
     useEffect(() => {
       if (currentTab === "Base Stats") {
-        Animated.timing(fill, {
-          toValue: stat,
-          duration: 1000,
-          useNativeDriver: false,
-        }).start();
+        if (!animationDone) {
+          Animated.timing(fill, {
+            toValue: stat,
+            duration: 1000,
+            useNativeDriver: false,
+          }).start(() => setAnimationDone(true));
+        }
       }
-    }, [currentTab]);
+    }, [currentTab, animationDone]);
 
     return (
       <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 15 }}>
