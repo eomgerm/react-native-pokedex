@@ -34,7 +34,7 @@ const Home = () => {
             sprites: pokemonData.sprites.other["official-artwork"].front_default,
             genera: pokemonSpeciesData.genera.find((genera) => genera.language.name === "en")?.genus,
             flavor_text: pokemonSpeciesData.flavor_text_entries
-              .find((flavorText) => flavorText.language.name === "en" && flavorText.version.name === "sword")
+              .find((flavorText) => flavorText.language.name === "en" && flavorText.version.name === "red")
               ?.flavor_text.replace(/\f/g, " ")
               .replace(/\n/g, " "),
             height: Number((pokemonData.height * 0.1).toFixed(2)),
@@ -95,7 +95,7 @@ const Home = () => {
       <FlatList
         style={{ flex: 1, marginTop: 8 }}
         data={pokemons}
-        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 24 }}
+        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 12 }}
         keyExtractor={(pokemon) => String(pokemon.id)}
         numColumns={2}
         showsVerticalScrollIndicator={false}
