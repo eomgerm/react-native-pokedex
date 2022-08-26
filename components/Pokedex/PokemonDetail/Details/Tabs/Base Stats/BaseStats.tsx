@@ -1,7 +1,8 @@
-import { Animated, Easing, Text, View } from "react-native";
-import { TabProps } from "../Details";
-import { POKEMON_TYPE_COLORS } from "../../../../../data/pokemonTypeColors";
+import { Animated, Text, View } from "react-native";
+import { TabProps } from "../../Details";
+import { POKEMON_TYPE_COLORS } from "../../../../../../data/pokemonTypeColors";
 import { useEffect, useMemo, useState } from "react";
+import TypeEffectiveness from "./TypeEffectiveness";
 
 const BaseStats = ({ pokemon, currentTab }: TabProps) => {
   const [animationDone, setAnimationDone] = useState<boolean>(false);
@@ -50,9 +51,16 @@ const BaseStats = ({ pokemon, currentTab }: TabProps) => {
 
   return (
     <View>
-      {pokemon.stats.map(({ name, base_stat }) => (
-        <Stat key={name} name={name} stat={base_stat} />
-      ))}
+      <View style={{ marginBottom: 10 }}>
+        {pokemon.stats.map(({ name, base_stat }) => (
+          <Stat key={name} name={name} stat={base_stat} />
+        ))}
+      </View>
+      <Text style={{ fontFamily: "CircularStdBold", fontSize: 24 }}>Type Defenses</Text>
+      <Text style={{ fontFamily: "CircularStdBold", fontSize: 16, marginTop: 8, color: "grey" }}>
+        The effectiveness of each type on {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
+      </Text>
+      <TypeEffectiveness pokemon={pokemon} />
     </View>
   );
 };
