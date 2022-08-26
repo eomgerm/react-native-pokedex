@@ -3,9 +3,9 @@ import Constants from "expo-constants";
 import Pokemon from "../../../../types/pokemon";
 import About from "./Tabs/About";
 import AppColors from "../../../../styles/colors";
-import { BaseSyntheticEvent, useMemo, useRef, useState } from "react";
-import BaseStats from "./Tabs/BaseStats";
-import Evolution from "./Tabs/Evolution";
+import { useMemo, useRef, useState } from "react";
+import BaseStats from "./Tabs/Base Stats/BaseStats";
+import Evolution from "./Tabs/Evolution/Evolution";
 import Moves from "./Tabs/Moves";
 
 type DetailsProps = {
