@@ -18,7 +18,7 @@ const Header = () => {
           <Ionicons name="menu" size={24} color="black" />
         </TouchableOpacity>
       </HeaderBase>
-      <Text style={{ paddingHorizontal: 27, fontFamily: "CircularStdBlack", fontSize: 40, paddingVertical: 20 }}>Pokedex</Text>
+      <Text style={{ paddingHorizontal: 21, fontFamily: "CircularStdBlack", fontSize: 40, paddingVertical: 20 }}>Pokedex</Text>
     </>
   );
 };
