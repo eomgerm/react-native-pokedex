@@ -1,4 +1,4 @@
-import { Animated, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
+import { Animated, Pressable, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
 import AppColors from "../../../../styles/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useCallback, useMemo, useState } from "react";
@@ -88,7 +88,9 @@ const FAB = () => {
 
   return (
     <>
-      <Animated.View style={overlay} />
+      <Animated.View style={overlay}>
+        <Pressable style={{ flex: 1 }} onPress={handleToggleMenu} />
+      </Animated.View>
       <Animated.View
         style={{
           position: "absolute",
